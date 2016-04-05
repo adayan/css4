@@ -4,10 +4,8 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>CSS 4</title>
 
-    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
@@ -88,10 +86,12 @@
   color: #90a959;
 }
     </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;]">
+  <body class="index" data-languages="[&quot;Demo&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -101,9 +101,7 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
+              <a href="#" data-language-name="Demo">Demo</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -111,236 +109,944 @@
         <ul class="search-results"></ul>
       <div id="toc">
       </div>
-        <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
-        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="introduction">Introduction</h1>
+        <h1 id="a">概述a</h1>
 
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>该文档主要介绍了CSS 4的一些新特性，包括Selectors level 4, Filter effects level 1。
+其他新特性及模块暂时未总结。</p>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<h1 id="selectors-level-4">Selectors Level 4</h1>
 
-<p>This example API documentation page was created with <a href="https://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
+<p>CSS选择器第四版</p>
 
-<h1 id="authentication">Authentication</h1>
+<h2 id="logical-combinations">逻辑组合 Logical Combinations</h2>
 
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h3 id="matches-s1-s2">:matches(s1, s2, …)</h3>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/zo6ma105/1/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
+<p>匹配任一选择器，可将多个选择器合并。</p>
 
-<blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
-</blockquote>
+<p><code class="prettyprint">li a:link, li a:hover, li a:visited, li a:focus</code></p>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p><code class="prettyprint">=&gt; li a:matches(:link, :hover, :visited, :focus)</code></p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<p>&nbsp;</p>
 
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
+<table><thead>
+<tr>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>12+ (-webkit-)</td>
+<td>5+ (-webkit-)</td>
+<td>4+ (-moz-)</td>
+<td>15+ (-webkit-)</td>
+<td>No</td>
+<td>?</td>
+<td>5+ (-webkit-)</td>
+</tr>
+</tbody></table>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+只有最新的Safari同时支持:matches和:any, 其他浏览器目前只支持:any
 </aside>
 
-<h1 id="kittens">Kittens</h1>
+<h3 id="not-s1-s2">:not(s1, s2, …)</h3>
 
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/4sLjg7ve/1/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>CSS 3中已有该选择器，但参数只允许一个选择器；在CSS 4中允许多个选择器作为参数。</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
+<p><code class="prettyprint">li:not(.nobg, :first-child)</code></p>
 
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
+<p>选取除了第一个元素和class为noby的li元素</p>
 
-<p>This endpoint retrieves all kittens.</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
-
-<h3 id="query-parameters">Query Parameters</h3>
+<p>&nbsp;</p>
 
 <table><thead>
 <tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>No</td>
+<td>latest</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
 </tr>
 </tbody></table>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
+<h3 id="has-s1-s2">:has(s1, s2, …)</h3>
 
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/k8h9qyru/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p><code class="prettyprint">li:has(&gt; span)</code></p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
+<p>选取包含span元素的li元素</p>
 
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can&rsquo;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
-
-<h3 id="url-parameters">URL Parameters</h3>
+<p>&nbsp;</p>
 
 <table><thead>
 <tr>
-<th>Parameter</th>
-<th>Description</th>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
 </tr>
 </tbody></table>
 
-          <h1 id="errors">Errors</h1>
+<h2 id="attribute-selectors">属性选择器 Attribute selectors</h2>
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
+<h3 id="case-sensitivity">Case-sensitivity</h3>
 
-<p>The Kittn API uses the following error codes:</p>
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/k8h9qyru/1/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>属性选择器中包含<code class="prettyprint">i</code>标识符，无论在大小写敏感的文档语言（eg.XML）或不敏感的文档语言（eg.HTML）中，都将忽略属性名和属性值的大小写。</p>
+
+<p><code class="prettyprint">[attr=&quot;VAL&quot; i]</code></p>
+
+<p>&nbsp;</p>
 
 <table><thead>
 <tr>
-<th>Error Code</th>
-<th>Meaning</th>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
+<td>49.0</td>
+<td>9</td>
+<td>47.0</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+<td>9</td>
+</tr>
+</tbody></table>
+
+<h2 id="linguistic-pseudo-classes">语言伪类 Linguistic Pseudo-classes</h2>
+
+<h3 id="lang">:lang</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/k8h9qyru/2/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>CSS 2中已有该选择器，在CSS 4中新增了通配符<code class="prettyprint">*</code>。</p>
+
+<p><code class="prettyprint">span:lang(*-CA)</code></p>
+
+<p>选取所有lang属性以’-CA’结尾（en-CA, fr-CA）的span标签</p>
+
+<p>&nbsp;</p>
+
+<table><thead>
+<tr>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody></table>
+
+<h3 id="dir-ltr-or-rtl">:dir(ltr or rtl)</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/xrym2Lhy/1/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>用于匹配文字方向的伪类选择器，选择器参数可为<code class="prettyprint">ltr</code>（从左到右） 或 <code class="prettyprint">rtl</code>（从右到左）。</p>
+
+<p><code class="prettyprint">p:dir(rtl)</code></p>
+
+<p>选取文字方向为从右到左的p标签</p>
+
+<p>&nbsp;</p>
+
+<table><thead>
+<tr>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>No</td>
+<td>No</td>
+<td>17+ (-moz-)</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody></table>
+
+<h2 id="location-pseudo-classes">链接伪类 Location Pseudo-classes</h2>
+
+<h3 id="any-link">:any-link</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/zo6ma105/2/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>该伪类选择器适用于拥有<code class="prettyprint">href</code>属性的元素。</p>
+
+<p><code class="prettyprint">a:any-link</code></p>
+
+<p>a标签（所有状态，eg.:hover, :visited, …）都将被选中</p>
+
+<p>&nbsp;</p>
+
+<table><thead>
+<tr>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>No</td>
+<td>latest</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody></table>
+
+<aside class="warning">
+名字很可能被换掉，W3C正在征求新的名字
+</aside>
+
+<h3 id="scope">:scope</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/ep10ozcn/embedded/html,css,result/dark/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>匹配标记为scoped的style元素的父级元素。</p>
+
+<p>&nbsp;</p>
+
+<table><thead>
+<tr>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>No</td>
+<td>No</td>
+<td>21+</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody></table>
+
+<aside class="warning">
+该选择器在Chrome 35版本中被移除
+</aside>
+
+<h2 id="user-action-pseudo-classes">用户行为伪类 User Action Pseudo-classes</h2>
+
+<h3 id="focus-within">:focus-within</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/ob91skow/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>当某个元素的:focus被应用，这个元素及祖先元素的:focus-within也会被匹配。</p>
+
+<p>&nbsp;</p>
+
+<table><thead>
+<tr>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody></table>
+
+<h3 id="drop">:drop</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/gyqmgeyw/1/embedded/js,html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>应用于“放”的目标元素。</p>
+
+<p><code class="prettyprint">:drop(active || valid || invalid):</code></p>
+
+<ul>
+<li><strong>active:</strong> 当<code class="prettyprint">drop target</code>是当前元素时</li>
+<li><strong>valid:</strong> 当<code class="prettyprint">drop target</code>有<code class="prettyprint">valid</code>和<code class="prettyprint">invalid</code>状态之分时（比如<code class="prettyprint">dropzone</code>属性中可以指定拖拽元素的类型）, 匹配<code class="prettyprint">valid</code>的<code class="prettyprint">drop target</code>；否则，匹配所有<code class="prettyprint">drop target</code>。</li>
+<li><strong>invalid:</strong> 当<code class="prettyprint">drop target</code>有<code class="prettyprint">valid</code>和<code class="prettyprint">invalid</code>状态之分时（比如<code class="prettyprint">dropzone</code>属性中可以指定拖拽元素的类型）, 匹配<code class="prettyprint">valid</code>的<code class="prettyprint">drop target</code>；否则，不匹配任何元素。</li>
+</ul>
+
+<p><code class="prettyprint">:drop() =&gt; :drop</code></p>
+
+<p>&nbsp;</p>
+
+<table><thead>
+<tr>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+`dropzone`属性还在working draft状态中，各个浏览器暂时没发现支持的&hellip;
+</aside>
+
+<h2 id="time-dimensional-pseudo-classes">状态伪类 Time-dimensional Pseudo-classes</h2>
+
+<h3 id="current-s1-s2">:current(s1, s2, …)</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/dz5ezvtn/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>时间维度的元素（eg.视频字幕，读屏）处于’当前状态’时应用此伪类。</p>
+
+<p>&nbsp;</p>
+
+<table><thead>
+<tr>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody></table>
+
+<h3 id="past-s1-s2">:past(s1, s2, …)</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/dz5ezvtn/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>时间维度的元素（eg.视频字幕，读屏）处于’当前状态’之前时应用此伪类。</p>
+
+<p>&nbsp;</p>
+
+<table><thead>
+<tr>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody></table>
+
+<h3 id="future-s1-s2">:future(s1, s2, …)</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/dz5ezvtn/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>时间维度的元素（eg.视频字幕，读屏）处于’当前状态’之后时应用此伪类。</p>
+
+<p>&nbsp;</p>
+
+<table><thead>
+<tr>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody></table>
+
+<h2 id="the-input-pseudo-classes">表单伪类 The Input Pseudo-classes</h2>
+
+<h3 id="read-only-amp-read-write">:read-only &amp; :read-write</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/pzuxefy6/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<ul>
+<li><strong><code class="prettyprint">:read-only</code></strong> 匹配内容不可编辑的元素</li>
+<li><strong><code class="prettyprint">:read-write</code></strong> 匹配内容可编辑的元素（input或contenteditable为true的元素）</li>
+</ul>
+
+<table><thead>
+<tr>
+<th></th>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>基础支持</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>-moz-</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+<td>Yes</td>
 </tr>
 <tr>
-<td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
+<td>contenteditable</td>
+<td>latest</td>
+<td>latest</td>
+<td>-moz-</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
 </tr>
+</tbody></table>
+
+<h3 id="placeholder-shown">:placeholder-shown</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/ybzkbkyo/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>各个浏览器已实现相应等价的选择器，命名使用的是<code class="prettyprint">-vendor-input-placeholder</code>。</p>
+
+<p>&nbsp;</p>
+
+<table><thead>
 <tr>
-<td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
 </tr>
+</thead><tbody>
 <tr>
-<td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
+<td>-webkit-</td>
+<td>-webkit-</td>
+<td>4~18 (:-moz-) 19+ (::-moz-)</td>
+<td>15+ (-webkit-)</td>
+<td>10+ (:-ms-) Edge(::-ms-)</td>
+<td>-webkit-</td>
+<td>4+ (-webkit-)</td>
 </tr>
+</tbody></table>
+
+<h3 id="default">:default</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/zatykbwn/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>匹配默认元素（eg.select的第一个option, form表单默认的submit button等）。</p>
+
+<p>&nbsp;</p>
+
+<table><thead>
 <tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
 </tr>
+</thead><tbody>
 <tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
+<td>10.0</td>
+<td>5.0</td>
+<td>4.0</td>
+<td>10.0</td>
+<td>No</td>
+<td>？</td>
+<td>5.0</td>
 </tr>
+</tbody></table>
+
+<h3 id="indeterminate">:indeterminate</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/23oaaz1n/embedded/js,html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>当一个元素的值处于不确定状态时匹配，比如checkbox有checked、unchecked和indeterminate三种状态。</p>
+
+<p>&nbsp;</p>
+
+<table><thead>
 <tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
 </tr>
+</thead><tbody>
 <tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
+<td>Yes</td>
+<td>3.0</td>
+<td>3.6</td>
+<td>10.60</td>
+<td>9.0</td>
+<td>？</td>
+<td>?</td>
 </tr>
+</tbody></table>
+
+<aside class="notice">
+Chrome中`type=&ldquo;radio&rdquo;`的元素也支持该伪类。
+</aside>
+
+<h3 id="valid-amp-invalid">:valid &amp; :invalid</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/8gh1sbjf/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>匹配元素(form, input)验证通过或不通过的状态，有些元素没有验证机制（eg.p标签）则不会被匹配。</p>
+
+<p>&nbsp;</p>
+
+<table><thead>
 <tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
 </tr>
+</thead><tbody>
 <tr>
-<td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
+<td>10.0</td>
+<td>5.0</td>
+<td>4.0</td>
+<td>10.0</td>
+<td>10(只支持input)</td>
+<td>？</td>
+<td>5.0</td>
 </tr>
+</tbody></table>
+
+<h3 id="in-range-amp-out-of-range">:in-range &amp; :out-of-range</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/pgzzen75/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>匹配元素的值在范围内或范围外，无范围限制的元素或者非表单元素都不会被匹配到。</p>
+
+<p>&nbsp;</p>
+
+<table><thead>
 <tr>
-<td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>10.0</td>
+<td>5.2</td>
+<td>29.0</td>
+<td>11.0</td>
+<td>No</td>
+<td>2.3</td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+
+<h3 id="required-amp-optional">:required &amp; :optional</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/8gh1sbjf/1/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>:required匹配有required属性的input元素，:optional则相反。</p>
+
+<p>&nbsp;</p>
+
+<table><thead>
+<tr>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>10.0</td>
+<td>5.0</td>
+<td>4.0</td>
+<td>10.0</td>
+<td>10</td>
+<td>？</td>
+<td>5.0</td>
+</tr>
+</tbody></table>
+
+<h3 id="user-invalid">:user-invalid</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/zxnay2Ld/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>form表单出错并不会匹配该伪类，只有当用户显著触发（比如提交表单）才会被匹配。</p>
+
+<p>&nbsp;</p>
+
+<table><thead>
+<tr>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody></table>
+
+<h2 id="tree-structural">结构伪类 Tree-Structural</h2>
+
+<h3 id="blank">:blank</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/hywgLhwq/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>和:empty相似，但:blank可以匹配到仅包含空格、tab、换行符的元素。</p>
+
+<p>&nbsp;</p>
+
+<table><thead>
+<tr>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>No</td>
+<td>No</td>
+<td>-moz-</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Firefox中:-moz-only-whitespace与:blank等价
+</aside>
+
+<aside class="warning">
+W3C在征集新的名字以取代`blank`
+</aside>
+
+<h3 id="nth-child-an-b-of-s">:nth-child(An+B [of S])</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/405c7t6t/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>:nth-child, :nth-of-type均为css3的选择器，css4中新加了对:nth-child选择器的过滤。</p>
+
+<p>&nbsp;</p>
+
+<table><thead>
+<tr>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>No</td>
+<td>latest</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>?</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+span:nth-of-type(2) => :nth-child(2 of span)
+</aside>
+
+<h2 id="descendant-combinator">后代选择器 Descendant combinator</h2>
+
+<h3 id="gt-gt">后代选择器&gt;&gt;</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/vzzq8pmk/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>CSS3中后代选择器是通过<code class="prettyprint">空格</code>表示的（eg.div span），CSS4中新增了<code class="prettyprint">&gt;&gt;</code>符号来表示，与<code class="prettyprint">空格</code>等价。</p>
+
+<p>&nbsp;</p>
+
+<table><thead>
+<tr>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+div span => div >> span
+</aside>
+
+<h2 id="grid-structural-selectors">网格选择器 Grid-Structural Selectors</h2>
+
+<h3 id="nbsp">列关系选择器||&nbsp;</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/t9s4L03a/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p><code class="prettyprint">col || cell</code></p>
+
+<p>该选择器表明<code class="prettyprint">单元格</code>和<code class="prettyprint">列</code>的关系。</p>
+
+<p><code class="prettyprint">col.selected || td</code>  选取class为selected列下的td元素; 在此选择器之前，可以使用:nth-child来选取单元，当设置<code class="prettyprint">colspan</code>属性时，选取的列不一定是正确的（看demo）</p>
+
+<p>&nbsp;</p>
+
+<table><thead>
+<tr>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody></table>
+
+<h3 id="nth-column-an-b">:nth-column(An+B)</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/t9s4L03a/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p><code class="prettyprint">n为整数</code></p>
+
+<p>选取符合An+B的列，从第一列开始匹配。</p>
+
+<p>&nbsp;</p>
+
+<table><thead>
+<tr>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody></table>
+
+<h3 id="nth-last-column-an-b">:nth-last-column(An+B)</h3>
+
+<iframe style="float:right;" width="50%" height="300" src="//jsfiddle.net/adayan/t9s4L03a/embedded/html,css,result/dark" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p><code class="prettyprint">n为整数</code></p>
+
+<p>选取符合An+B的列，从最后一列开始匹配。</p>
+
+<p>&nbsp;</p>
+
+<table><thead>
+<tr>
+<th>Chrome</th>
+<th>Safari</th>
+<th>Firefox</th>
+<th>Opera</th>
+<th>IE</th>
+<th>Android</th>
+<th>ios</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
 </tr>
 </tbody></table>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
+                <a href="#" data-language-name="Demo">Demo</a>
           </div>
       </div>
     </div>
