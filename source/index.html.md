@@ -199,7 +199,7 @@ No | No | No | No | No | No | No
 
 * **active:** 当`drop target`是当前元素时
 * **valid:** 当`drop target`有`valid`和`invalid`状态之分时（比如`dropzone`属性中可以指定拖拽元素的类型）, 匹配`valid`的`drop target`；否则，匹配所有`drop target`。
-* **invalid:** 当`drop target`有`valid`和`invalid`状态之分时（比如`dropzone`属性中可以指定拖拽元素的类型）, 匹配`valid`的`drop target`；否则，不匹配任何元素。
+* **invalid:** 当`drop target`有`valid`和`invalid`状态之分时（比如`dropzone`属性中可以指定拖拽元素的类型）, 匹配`invalid`的`drop target`；否则，不匹配任何元素。
 
 `:drop() => :drop`
 
