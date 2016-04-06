@@ -4,7 +4,6 @@ title: CSS 4
 language_tabs:
   - Demo
 
-
 search: true
 ---
 
@@ -66,7 +65,7 @@ No | latest | No | No | No | No | No
 
 `li:has(> span)`
 
-选取包含span元素的li元素
+选取子元素为span的li元素
 
 
 &nbsp;
@@ -460,3 +459,5 @@ No | No | No | No | No | No | No
 Chrome | Safari | Firefox | Opera | IE | Android | ios
 --------- | ------- | ------- | ------- | ------- | ------- | -------
 No | No | No | No | No | No | No
+
+
